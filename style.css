@@ -5,7 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: #302f2f;
   margin: 0;
   gap: 20px;
 }
@@ -18,27 +18,36 @@ h2 {
 
 .sidebar {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 17%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  width: 12%; /* Set the width of the sidebar */
+  position: absolute; 
   z-index: 1; /* Stay on top */
   left: 0; /* can add top: 0; if need*/
-  background-color: #111; /* Black */
+  background-color: #202020;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-item-container {
+  top:200px;
+  width:100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 .sidebar-item {
-  width: 70%;
-  height: 10%;
-  background-color: rgb(218, 28, 28);
+  width: 90%;
+  height: 2%;
+  background-color: #202020;
   margin: 1px;
   border-radius: 5px;
+
 }
 .sidebar-item:hover {
-  background-color: #800f0f; 
+  background-color: #2e2e2e; 
 }
 
 .chat-container {
