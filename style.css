@@ -1,72 +1,52 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f9f9f9;
-    margin: 0;
-  }
-  
-  .chat-container {
-    width: 500px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-  
-  .chat-box {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .message {
-    max-width: 80%;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-  }
-  
-  .user {
-    align-self: flex-end;
-    background-color: #0078ff;
-    color: white;
-  }
-  
-  .bot {
-    align-self: flex-start;
-    background-color: #e5e5ea;
-  }
-  
-  .input-container {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-  }
-  
-  input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  button {
-    margin-left: 10px;
-    padding: 10px 15px;
-    border: none;
-    background: #0078ff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+/* Intro screen styling */
+.intro-container {
+  width: 600px;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 1s ease-in; /* Fade-in animation */
+}
+
+/* Intro chat area */
+.intro-chat {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Intro messages */
+.intro-chat .message {
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+/* Start button styling */
+#startBtn {
+  padding: 12px 30px;
+  background: #ffeb3b; /* Yellow */
+  color: #333;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#startBtn:hover {
+  transform: scale(1.05);
+}
+
+/* Fade-in animation for intro */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

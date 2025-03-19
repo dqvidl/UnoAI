@@ -1,0 +1,46 @@
+/* General body styling for centering content */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f9f9f9; /* Light gray background */
+    margin: 0;
+}
+
+/* Container for the login form */
+.login-container {
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
+/* Styling for input fields */
+.login-container input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px;
+}
+
+/* Styling for buttons */
+.login-container button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    background: #0078ff; /* Blue button color */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Error message styling */
+#errorMsg {
+    color: red; /* Red text for errors */
+}
