@@ -53,3 +53,7 @@ function appendMessage(message, senderClass) {
   chatBox.appendChild(messageElem);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+function changeMainPhrase(newText) {
+  document.getElementById("mainPhrase").textContent = newText;
+}
