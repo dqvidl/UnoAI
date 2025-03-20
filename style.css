@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -11,19 +12,19 @@ body {
   gap: 20px;
 }
 h1 {
-  font-size: 300px;
+  font-size: 1200%;
   color:white;
   margin-bottom:5px;
 }
 h2 {
-  font-size: 100px;
+  font-size: 500%;
   color: white;
-  margin-bottom:350px;
 }
 h3 {
-  font-size: 550%;
+  font-size: 375%;
   color:white;
   font-weight:bolder;
+  margin-bottom:17%;
 }
 h4 {
   font-size: 300%;
