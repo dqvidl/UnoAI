@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -12,10 +13,12 @@ body {
 h1 {
   font-size: 300px;
   color:white;
+  margin-bottom:5px;
 }
 h2 {
   font-size: 100px;
   color: white;
+  margin-bottom:350px;
 }
 h3 {
   font-size: 550%;
@@ -49,7 +52,7 @@ label{
   justify-content: center;
 }
 .sidebar-item-container {
-  top:200px;
+  top:300px;
   width:100%;
   position: absolute;
   display: flex;
