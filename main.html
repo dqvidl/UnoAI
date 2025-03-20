@@ -10,15 +10,15 @@
   <div class = "sidebar">
     <h3>UnoAI</h3>
     <div class = "sidebar-item-container">
-      <button class = "sidebar-item" onclick="window.open('Menu.html', '_self')">D1 Hater</button>
-      <button class = "sidebar-item" onclick="window.open('Menu.html', '_self')">Mr. Lauder bot</button>
-      <button class = "sidebar-item" onclick="window.open('Menu.html', '_self')">AI3</button>
-      <button class = "sidebar-item" onclick="window.open('Menu.html', '_self')">AI4</button>
-      <button class = "sidebar-item" onclick="window.open('Menu.html', '_self')">AI5</button>
+      <button class = "sidebar-item" onclick="changeMainPhrase('Gotta Hate Em All!')">D1 Hater</button>
+      <button class = "sidebar-item" onclick="changeMainPhrase('Whos The best teacher? I am. Oh yeah!')">LauderBot2000</button>
+      <button class = "sidebar-item" onclick="changeMainPhrase('Erm its actually...')">King Nerd</button>
+      <button class = "sidebar-item" onclick="changeMainPhrase('N/A')">whatever this one is</button>
+      <button class = "sidebar-item" onclick="changeMainPhrase('N/A')">whatever this one is</button>
     </div>
     <div class = "login-btn">Login</div>
   </div>
-  <h5>What can you help with, D1 hater?</h5>
+  <h3 id = "mainPhrase">Please choose your AI.</h3>
   <div class="chat-container">
     <div class="chat-box" id="chatBox"></div>
     <div class="input-container">
