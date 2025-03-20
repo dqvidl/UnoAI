@@ -14,23 +14,24 @@ h1 {
   font-size: 1200%;
   color:white;
   margin-bottom:5px;
+  margin-top:12.5%
 }
 h2 {
   font-size: 500%;
   color: white;
+  margin-bottom:15%;
 }
 h3 {
-  font-size: 375%;
+  font-size: 400%;
   color:white;
-  font-weight:bolder;
-  margin-bottom:17%;
 }
 h4 {
-  font-size: 300%;
+  font-size: 375%;
   color:white;
+  margin-bottom:5px;
 }
 h5 {
-  font-size: 200%;
+  font-size: 300%;
   color:white;
 }
 label{
