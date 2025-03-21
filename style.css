@@ -95,10 +95,10 @@ label{
 .profile {
   display: none; /* Hidden initially */
   position: fixed;
-  top: 40%;
-  left: 35%;
-  width: 30%;
-  height: 30%;
+  top: 24.5%;
+  right: 2%;
+  width: 25%;
+  height: 70%;
   background: #2e2e2e; 
   border: 3px solid #202020;
   border-radius: 10px;
@@ -115,14 +115,6 @@ label{
   text-align: center;
   position: relative;
   color:white;
-}
-
-.profile-exit-btn {
-  position: relative;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 .chat-container {
