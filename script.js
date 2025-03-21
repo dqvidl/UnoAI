@@ -55,11 +55,15 @@ function appendMessage(message, senderClass) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function changeMainPhrase(newText) {
+function changeUI(newText) {
   document.getElementById("mainPhrase").textContent = newText;
+  document.getElementById("chat-container").style.display.flex;
+  
 }
 window.onload = function () {
   document.getElementById("profile-btn").addEventListener("click", toggleProfile);
+  document.getElementById("D1 Hater").addEventListener("click", changeUI("Gotta hate em all!"), );
+  document.getElementById("").addEventListener("click", );
 };
 
 function toggleProfile() {
@@ -71,7 +75,3 @@ function toggleProfile() {
       element.style.display = "none"; // Hide it
   }
 }
-
-// function closeProfile() {
-//   document.getElementById("profile").style.display = "none";
-// }
