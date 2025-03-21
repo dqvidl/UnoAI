@@ -1,5 +1,6 @@
 // Event listeners for sending a message by clicking the button or pressing Enter
 document.getElementById("sendBtn").addEventListener("click", sendMessage);
+
 document.getElementById("userInput").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     sendMessage();
@@ -57,3 +58,20 @@ function appendMessage(message, senderClass) {
 function changeMainPhrase(newText) {
   document.getElementById("mainPhrase").textContent = newText;
 }
+window.onload = function () {
+  document.getElementById("profile-btn").addEventListener("click", toggleProfile);
+};
+
+function toggleProfile() {
+  let element = document.getElementById("profile");
+
+  if (element.style.display === "none") {
+      element.style.display = "flex"; // Show it
+  } else {
+      element.style.display = "none"; // Hide it
+  }
+}
+
+// function closeProfile() {
+//   document.getElementById("profile").style.display = "none";
+// }
