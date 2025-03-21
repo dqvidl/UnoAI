@@ -10,11 +10,11 @@
   <div class = "sidebar">
     <h3>UnoAI</h3>
     <div class = "sidebar-item-container">
-      <button class = "sidebar-item" onclick="changeMainPhrase('Gotta Hate Em All!')">D1 Hater</button>
-      <button class = "sidebar-item" onclick="changeMainPhrase('Whos The best teacher? I am. Oh yeah!')">LauderBot2000</button>
-      <button class = "sidebar-item" onclick="changeMainPhrase('Erm its actually...')">King Nerd</button>
-      <button class = "sidebar-item" onclick="changeMainPhrase('N/A')">whatever this one is</button>
-      <button class = "sidebar-item" onclick="changeMainPhrase('N/A')">whatever this one is</button>
+      <button class = "sidebar-item" id = "D1 Hater" onclick="changeMainPhrase('Gotta Hate Em All!')">D1 Hater</button>
+      <button class = "sidebar-item" id = "LauderBot2000" onclick="changeMainPhrase('Whos The best teacher? I am. Oh yeah!')">LauderBot2000</button>
+      <button class = "sidebar-item" id = "King Nerd" onclick="changeMainPhrase('Erm actually...')">King Nerd</button>
+      <button class = "sidebar-item" id = "Gym Rat" onclick="changeMainPhrase('Yeah buddy! Lightweight!')">Gym Rat</button>
+      <button class = "sidebar-item" id = "" onclick="changeMainPhrase('Do I really have to talk to them...?')">Closet Kid</button>
     </div>
     <button class = "profile-btn" id = "profile-btn">Profile</button>
   </div>
@@ -25,7 +25,7 @@
     </div>
   </div>
   <h3 id = "mainPhrase">Please choose your AI.</h3>
-  <div class="chat-container">
+  <div class="chat-container" id = "chat-container">
     <div class="chat-box" id="chatBox"></div>
     <div class="input-container">
       <input type="text" id="userInput" placeholder="Type a message...">
@@ -34,4 +34,4 @@
   </div>
   <script src="script.js"></script>
 </body>
-</html>
+</html> 
