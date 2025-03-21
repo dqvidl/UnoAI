@@ -3,17 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot UI</title>
+  <title>UnoAI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-box" id="chatBox"></div>
-    <div class="input-container">
-      <input type="text" id="userInput" placeholder="Type a message...">
-      <button id="sendBtn">Send</button>
-    </div>
+<!-- Sidebar with AI personality buttons -->
+<div class="sidebar">
+  <h3>UnoAI</h3>
+  <div class="sidebar-item-container">
+    <!-- Each button now passes the AI phrase and its color scheme class -->
+    <button class="sidebar-item" onclick="changeMainPhrase('Gotta Hate Em All!', 'ai-d1-hater')">D1 Hater</button>
+    <button class="sidebar-item" onclick="changeMainPhrase('Whos The best teacher? I am. Oh yeah!', 'ai-lauderbot2000')">LauderBot2000</button>
+    <button class="sidebar-item" onclick="changeMainPhrase('Erm its actually...', 'ai-king-nerd')">King Nerd</button>
+    <button class="sidebar-item" onclick="changeMainPhrase('N/A', 'ai-placeholder1')">whatever this one is</button>
+    <button class="sidebar-item" onclick="changeMainPhrase('N/A', 'ai-placeholder2')">whatever this one is</button>
+    <button class="sidebar-item" onclick="showLeaderboard()">Leaderboard</button>
   </div>
-  <script src="script.js"></script>
+  <button class="login-btn" onclick="logout()">Logout</button>
+</div>
+<!-- Main phrase heading that changes with AI selection -->
+<h3 id="mainPhrase">Please choose your AI.</h3>
+<!-- Chat container for user-AI interaction -->
+<div class="chat-container">
+  <div class="chat-box" id="chatBox"></div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+<!-- Leaderboard modal, hidden by default -->
+<div id="leaderboard" style="display: none;">
+  <h3>Leaderboard</h3>
+  <ul id="leaderboard-list"></ul>
+  <button onclick="hideLeaderboard()">Close</button>
+</div>
+<script src="script.js"></script>
 </body>
 </html>

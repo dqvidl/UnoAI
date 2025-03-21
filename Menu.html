@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>UnoAI - Login</title>
+</head>
+<body style="background: linear-gradient(to right, #00cc00, #00b7eb);">
+<!-- Login form container with enhanced styling -->
+<div class="login-form">
+    <h1>UnoAI</h1>
+    <h2>The AI you never knew you needed.</h2>
+    <h4>Welcome to UnoAI</h4>
+    <h5 id="form-title">Please login to your account!</h5>
+    <form id="auth-form">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <button type="submit" class="custom-btn btn-7"><span id="submit-btn-text">Login</span></button>
+    </form>
+    <p id="toggle-link">Don't have an account? <a href="#" onclick="toggleAuthMode()">Sign up</a></p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
