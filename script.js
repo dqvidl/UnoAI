@@ -55,18 +55,21 @@ function appendMessage(message, senderClass) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+
 function changeUI(newText) {
   document.getElementById("mainPhrase").textContent = newText;
-  document.getElementById("chat-container").style.display.flex;
-  
+  document.getElementById("chat-container").style.display = "flex";
 }
 window.onload = function () {
   document.getElementById("profile-btn").addEventListener("click", toggleProfile);
-  document.getElementById("D1 Hater").addEventListener("click", changeUI("Gotta hate em all!"), );
-  document.getElementById("").addEventListener("click", );
+  document.getElementById("D1 Hater").addEventListener("click", () => changeUI("Gotta hate em all!"));
+  document.getElementById("LauderBot2000").addEventListener("click", () => changeUI("Who's the best teacher? I am."));
+  document.getElementById("King Nerd").addEventListener("click", () => changeUI("Erm, actually..."));
+  document.getElementById("Gym Rat").addEventListener("click", () => changeUI("Yeahh buddy! Lightweight!"));
+  document.getElementById("Closet Kid").addEventListener("click", () => changeUI("Do I really have to talk to them...?"));
 };
 
-function toggleProfile() {
+  function toggleProfile() {
   let element = document.getElementById("profile");
 
   if (element.style.display === "none") {
