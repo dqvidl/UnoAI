@@ -94,22 +94,25 @@ label{
   display: none; /* Hidden initially */
   position: fixed;
   top: 40%;
-  left: 40%;
+  left: 35%;
   width: 30%;
   height: 30%;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-  background-color: white;
+  background: #2e2e2e; 
+  border: 3px solid #202020;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px #202020;
   justify-content: center;
   align-items: center;
 }
 
 .profile-content {
-  background: white;
+  background-color:#2e2e2e;
   padding: 20px;
   border-radius: 10px;
   width: 300px;
   text-align: center;
   position: relative;
+  color:white;
 }
 
 .profile-exit-btn {
