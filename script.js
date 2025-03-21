@@ -58,7 +58,8 @@ function appendMessage(message, senderClass) {
 
 function changeUI(newText) {
   document.getElementById("mainPhrase").textContent = newText;
-  document.getElementById("chat-container").style.display = "flex";
+  document.getElementById("chat-container").style.display = "flex" ;
+  document.getElementById("chatBox").innerHTML = "";
 }
 window.onload = function () {
   document.getElementById("profile-btn").addEventListener("click", toggleProfile);
