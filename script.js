@@ -9,6 +9,8 @@ document.getElementById("userInput").addEventListener("keypress", function (e) {
 
 // Function to send the user message and fetch the GPT response
 async function sendMessage() {
+  let audio = new Audio("message.mp3"); // Load the sound file
+  audio.play(); // Play the sound
   const inputField = document.getElementById("userInput");
   const message = inputField.value.trim();
   if (message === "") return;
