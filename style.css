@@ -1,4 +1,4 @@
-/* General body styling */
+/* General body styling for a sleek, centered layout */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -6,108 +6,81 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #302f2f; /* Retained Matthew's original background color */
+  background: linear-gradient(to right, #00cc00, #00b7eb); /* Vibrant gradient background */
   margin: 0;
   gap: 20px;
+  transition: background-color 0.5s ease; /* Smooth theme transitions */
 }
 
-/* Headings */
-h1 {
-  font-size: 1200%;
-  color: white;
-  margin-bottom: 5px;
-  margin-top: 12.5%;
-}
+/* Headings for consistent typography */
+h1 { font-size: 36px; color: #333; margin-bottom: 10px; }
+h2 { font-size: 18px; color: #666; margin-bottom: 20px; }
+h3 { font-size: 24px; color: white; }
+h4 { font-size: 24px; color: #333; margin-bottom: 20px; }
+h5 { font-size: 18px; color: #333; }
+label { font-size: 16px; color: #333; display: block; text-align: left; margin-bottom: 5px; }
 
-h2 {
-  font-size: 500%;
-  color: white;
-  margin-bottom: 15%;
-}
-
-h3 {
-  font-size: 400%;
-  color: white;
-}
-
-h4 {
-  font-size: 375%;
-  color: white;
-  margin-bottom: 5px;
-}
-
-h5 {
-  font-size: 300%;
-  color: white;
-}
-
-label {
-  font-size: 150%;
-  color: white;
-}
-
-/* Sidebar */
+/* Sidebar for AI selection and navigation */
 .sidebar {
   height: 100%;
   width: 12%;
-  position: absolute;
-  display: flex;
-  z-index: 1;
+  position: fixed;
   left: 0;
-  background-color: #202020; /* Retained Matthew's original sidebar color */
+  background-color: #202020;
   color: white;
-  overflow-x: hidden;
   padding-top: 20px;
-  justify-content: center;
-}
-
-.sidebar-item-container {
-  top: 300px;
-  width: 100%;
-  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
 }
 
+/* Container for sidebar items */
+.sidebar-item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+/* Sidebar buttons with hover effects */
 .sidebar-item {
   width: 80%;
-  height: 2%;
-  background-color: #202020;
-  margin: 10px;
-  border-radius: 5px;
-  text-align: left;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #303030;
   color: white;
   border: none;
-  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar-item:hover {
-  background-color: #2e2e2e;
+  background-color: #505050;
 }
 
-/* Login button (used as logout) */
+/* Logout button at the bottom of sidebar */
 .login-btn {
   position: absolute;
-  bottom: 200px;
+  bottom: 20px;
   width: 80%;
-  height: 55px;
-  background-color: #2e2e2e;
-  border-radius: 5px;
-  text-align: center;
-  line-height: 55px;
+  padding: 10px;
+  background-color: #303030;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
-  background-color: #454545;
+  background-color: #505050;
 }
 
-/* Chat container */
+/* Chat container for crisp messaging */
 .chat-container {
   width: 40%;
   height: 90%;
@@ -115,64 +88,63 @@ label {
   flex-direction: column;
   background: #444444;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   overflow: hidden;
+  transition: background-color 0.5s ease;
 }
 
+/* Chat box for message display */
 .chat-box {
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 
+/* Message styling for user and bot */
 .message {
   max-width: 80%;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 8px;
   margin-bottom: 10px;
   word-wrap: break-word;
 }
 
-.user {
-  align-self: flex-end;
-  background-color: #0078ff;
-  color: white;
-}
+.user { align-self: flex-end; background-color: #0078ff; color: white; }
+.bot { align-self: flex-start; background-color: #e5e5ea; color: #333; }
 
-.bot {
-  align-self: flex-start;
-  background-color: #e5e5ea;
-}
-
+/* Input container for sending messages */
 .input-container {
   display: flex;
   padding: 10px;
-  border-top: 1px solid #444444;
   background-color: #444444;
+  border-top: 1px solid #555;
 }
 
-input {
+.input-container input {
   flex: 1;
   padding: 10px;
   border: none;
   border-radius: 5px;
-  outline: none;
-  max-height: 50px;
-  width: 20%;
-  background-color: #444444;
+  background-color: #555;
   color: white;
+  outline: none;
 }
 
-button {
+.input-container button {
   margin-left: 10px;
   padding: 10px 15px;
-  border: none;
   background: #0078ff;
   color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+  background: #0056b3;
 }
 
 /* Custom button styling for login/signup */
@@ -189,96 +161,18 @@ button {
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
-  7px 7px 20px 0px rgba(0,0,0,.1),
-  4px 4px 5px 0px rgba(0,0,0,.1);
-  outline: none;
+  box-shadow: inset 2px 2px 2px rgba(255,255,255,.5), 7px 7px 20px rgba(0,0,0,.1);
 }
 
 .btn-7 {
   background: linear-gradient(0deg, rgba(255,151,0,1) 0%, rgba(251,75,2,1) 100%);
-  line-height: 42px;
-  padding: 0;
   border: none;
 }
 
-.btn-7 span {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+.btn-7 span { display: block; width: 100%; height: 100%; }
+.btn-7:hover { color: rgba(251,75,2,1); background: transparent; }
 
-.btn-7:before,
-.btn-7:after {
-  position: absolute;
-  content: "";
-  right: 0;
-  bottom: 0;
-  background: rgba(251,75,2,1);
-  box-shadow: -7px -7px 20px 0px rgba(255,255,255,.9),
-  -4px -4px 5px 0px rgba(255,255,255,.9),
-  7px 7px 20px 0px rgba(0,0,0,.2),
-  4px 4px 5px 0px rgba(0,0,0,.3);
-  transition: all 0.3s ease;
-}
-
-.btn-7:before {
-  height: 0%;
-  width: 2px;
-}
-
-.btn-7:after {
-  width: 0%;
-  height: 2px;
-}
-
-.btn-7:hover {
-  color: rgba(251,75,2,1);
-  background: transparent;
-}
-
-.btn-7:hover:before {
-  height: 100%;
-}
-
-.btn-7:hover:after {
-  width: 100%;
-}
-
-.btn-7 span:before,
-.btn-7 span:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  background: rgba(251,75,2,1);
-  box-shadow: -7px -7px 20px 0px rgba(255,255,255,.9),
-  -4px -4px 5px 0px rgba(255,255,255,.9),
-  7px 7px 20px 0px rgba(0,0,0,.2),
-  4px 4px 5px 0px rgba(0,0,0,.3);
-  transition: all 0.3s ease;
-}
-
-.btn-7 span:before {
-  width: 2px;
-  height: 0%;
-}
-
-.btn-7 span:after {
-  height: 2px;
-  width: 0%;
-}
-
-.btn-7 span:hover:before {
-  height: 100%;
-}
-
-.btn-7 span:hover:after {
-  width: 100%;
-}
-
-/* Leaderboard styling */
+/* Leaderboard modal styling */
 #leaderboard {
   position: fixed;
   top: 50%;
@@ -287,239 +181,82 @@ button {
   background-color: #444444;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   z-index: 1000;
 }
 
-#leaderboard h3 {
-  color: white;
-  margin-bottom: 10px;
-}
+#leaderboard h3 { color: white; margin-bottom: 10px; }
+#leaderboard-list { list-style: none; padding: 0; margin-bottom: 20px; }
+#leaderboard-list li { color: white; margin-bottom: 5px; }
 
-#leaderboard-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-#leaderboard-list li {
-  color: white;
-  margin-bottom: 5px;
-}
-
-/* Login form styling for menu.html */
+/* Login form styling for a professional look */
 .login-form {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   width: 300px;
   text-align: center;
-}
-
-.login-form h1 {
-  font-size: 36px;
-  color: #333333;
-  margin-bottom: 10px;
-}
-
-.login-form h2 {
-  font-size: 18px;
-  color: #666666;
-  margin-bottom: 20px;
-}
-
-.login-form h4 {
-  font-size: 24px;
-  color: #333333;
-  margin-bottom: 20px;
-}
-
-.login-form h5 {
-  font-size: 18px;
-  color: #333333;
-  margin-bottom: 20px;
-}
-
-.login-form label {
-  font-size: 16px;
-  color: #333333;
-  display: block;
-  text-align: left;
-  margin-bottom: 5px;
 }
 
 .login-form input {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   outline: none;
 }
 
-.login-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #0078ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+.login-form button:hover { background-color: #0056b3; }
+.login-form a { color: #0078ff; text-decoration: none; }
+.login-form a:hover { text-decoration: underline; }
 
-.login-form button:hover {
-  background-color: #0056b3;
-}
-
-.login-form p {
-  font-size: 14px;
-  color: #666666;
-  margin-top: 15px;
-}
-
-.login-form a {
-  color: #0078ff;
-  text-decoration: none;
-}
-
-.login-form a:hover {
-  text-decoration: underline;
-}
-
-/* Color schemes for AI personalities */
-
-/* D1 Hater - Bold and aggressive red/black theme */
+/* AI personality themes */
 .ai-d1-hater {
-  background-color: #ff4d4d; /* Red */
-  color: #000000; /* Black text */
+  background-color: #ff4d4d;
+  color: #000;
 }
+.ai-d1-hater .sidebar { background-color: #990000; }
+.ai-d1-hater .chat-container { background-color: #ff6666; }
+.ai-d1-hater .sidebar-item { background-color: #ff6666; }
+.ai-d1-hater .sidebar-item:hover { background-color: #ff9999; }
 
-.ai-d1-hater .sidebar {
-  background-color: #990000; /* Darker red */
-}
-
-.ai-d1-hater .chat-container {
-  background-color: #ff6666; /* Lighter red */
-}
-
-.ai-d1-hater .mainPhrase {
-  color: #ffffff; /* White text */
-}
-
-.ai-d1-hater .sidebar-item {
-  background-color: #ff6666;
-}
-
-.ai-d1-hater .sidebar-item:hover {
-  background-color: #ff9999;
-}
-
-/* LauderBot2000 - Confident and vibrant gold/purple theme */
 .ai-lauderbot2000 {
-  background-color: #ffd700; /* Gold */
-  color: #4b0082; /* Indigo text */
+  background-color: #ffd700;
+  color: #4b0082;
 }
+.ai-lauderbot2000 .sidebar { background-color: #4b0082; }
+.ai-lauderbot2000 .chat-container { background-color: #ffe066; }
+.ai-lauderbot2000 .sidebar-item { background-color: #ffe066; }
+.ai-lauderbot2000 .sidebar-item:hover { background-color: #fff0b3; }
 
-.ai-lauderbot2000 .sidebar {
-  background-color: #4b0082; /* Indigo */
-}
-
-.ai-lauderbot2000 .chat-container {
-  background-color: #ffe066; /* Lighter gold */
-}
-
-.ai-lauderbot2000 .mainPhrase {
-  color: #4b0082; /* Indigo text */
-}
-
-.ai-lauderbot2000 .sidebar-item {
-  background-color: #ffe066;
-}
-
-.ai-lauderbot2000 .sidebar-item:hover {
-  background-color: #fff0b3;
-}
-
-/* King Nerd - Intellectual blue/white theme */
 .ai-king-nerd {
-  background-color: #4d94ff; /* Blue */
-  color: #ffffff; /* White text */
+  background-color: #4d94ff;
+  color: #fff;
 }
+.ai-king-nerd .sidebar { background-color: #003366; }
+.ai-king-nerd .chat-container { background-color: #66a3ff; }
+.ai-king-nerd .sidebar-item { background-color: #66a3ff; }
+.ai-king-nerd .sidebar-item:hover { background-color: #99c2ff; }
 
-.ai-king-nerd .sidebar {
-  background-color: #003366; /* Dark blue */
-}
-
-.ai-king-nerd .chat-container {
-  background-color: #66a3ff; /* Lighter blue */
-}
-
-.ai-king-nerd .mainPhrase {
-  color: #ffffff; /* White text */
-}
-
-.ai-king-nerd .sidebar-item {
-  background-color: #66a3ff;
-}
-
-.ai-king-nerd .sidebar-item:hover {
-  background-color: #99c2ff;
-}
-
-/* Placeholder 1 - Green theme */
 .ai-placeholder1 {
-  background-color: #66cc66; /* Green */
-  color: #000000; /* Black text */
+  background-color: #66cc66;
+  color: #000;
 }
+.ai-placeholder1 .sidebar { background-color: #006600; }
+.ai-placeholder1 .chat-container { background-color: #99ff99; }
+.ai-placeholder1 .sidebar-item { background-color: #99ff99; }
+.ai-placeholder1 .sidebar-item:hover { background-color: #ccffcc; }
 
-.ai-placeholder1 .sidebar {
-  background-color: #006600; /* Dark green */
-}
-
-.ai-placeholder1 .chat-container {
-  background-color: #99ff99; /* Lighter green */
-}
-
-.ai-placeholder1 .mainPhrase {
-  color: #ffffff; /* White text */
-}
-
-.ai-placeholder1 .sidebar-item {
-  background-color: #99ff99;
-}
-
-.ai-placeholder1 .sidebar-item:hover {
-  background-color: #ccffcc;
-}
-
-/* Placeholder 2 - Orange/teal theme */
 .ai-placeholder2 {
-  background-color: #ff9900; /* Orange */
-  color: #008080; /* Teal text */
+  background-color: #ff9900;
+  color: #008080;
 }
-
-.ai-placeholder2 .sidebar {
-  background-color: #008080; /* Teal */
-}
-
-.ai-placeholder2 .chat-container {
-  background-color: #ffcc66; /* Lighter orange */
-}
-
-.ai-placeholder2 .mainPhrase {
-  color: #008080; /* Teal text */
-}
-
-.ai-placeholder2 .sidebar-item {
-  background-color: #ffcc66;
-}
-
-.ai-placeholder2 .sidebar-item:hover {
-  background-color: #ffe0b3;
-}
+.ai-placeholder2 .sidebar { background-color: #008080; }
+.ai-placeholder2 .chat-container { background-color: #ffcc66; }
+.ai-placeholder2 .sidebar-item { background-color: #ffcc66; }
+.ai-placeholder2 .sidebar-item:hover { background-color: #ffe0b3; }
 
 /* Made by Isaac */
