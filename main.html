@@ -1,42 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UnoAI</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: linear-gradient(#30142b, #a12727);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: rgba(0,0,0,.7);
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,.5);
+    }
+    .sidebar h3 { margin: 0 0 20px; color: #f68e44; }
+    .sidebar button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background: #b79726;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .sidebar button:hover { background: #f49803; }
+    .leaderboard { margin-top: 20px; }
+    .leaderboard ul { list-style: none; padding: 0; }
+    .leaderboard li { padding: 5px 0; }
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-area { flex-grow: 1; }
+    .chat-input {
+      display: flex;
+      margin-top: 20px;
+    }
+    .chat-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      background: transparent;
+      color: #fff;
+    }
+    .chat-input button {
+      padding: 10px 20px;
+      background: #b79726;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+    }
+    .chat-input button:hover { background: #f49803; }
+  </style>
 </head>
 <body>
-<!-- Sidebar with AI personality buttons -->
 <div class="sidebar">
-  <h3>UnoAI</h3>
-  <div class="sidebar-item-container">
-    <!-- Each button now passes the AI phrase and its color scheme class -->
-    <button class="sidebar-item" onclick="changeMainPhrase('Gotta Hate Em All!', 'ai-d1-hater')">D1 Hater</button>
-    <button class="sidebar-item" onclick="changeMainPhrase('Whos The best teacher? I am. Oh yeah!', 'ai-lauderbot2000')">LauderBot2000</button>
-    <button class="sidebar-item" onclick="changeMainPhrase('Erm its actually...', 'ai-king-nerd')">King Nerd</button>
-    <button class="sidebar-item" onclick="changeMainPhrase('N/A', 'ai-placeholder1')">whatever this one is</button>
-    <button class="sidebar-item" onclick="changeMainPhrase('N/A', 'ai-placeholder2')">whatever this one is</button>
-    <button class="sidebar-item" onclick="showLeaderboard()">Leaderboard</button>
+  <h3>AI Personalities</h3>
+  <button>D1 Hater</button>
+  <button>LauderBot2000</button>
+  <button>King Nerd</button>
+  <div class="leaderboard">
+    <h3>Leaderboard</h3>
+    <ul id="leaderboardList"></ul>
   </div>
-  <button class="login-btn" onclick="logout()">Logout</button>
+  <button id="logoutBtn">Logout</button>
 </div>
-<!-- Main phrase heading that changes with AI selection -->
-<h3 id="mainPhrase">Please choose your AI.</h3>
-<!-- Chat container for user-AI interaction -->
-<div class="chat-container">
-  <div class="chat-box" id="chatBox"></div>
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type a message...">
+<div class="main-content">
+  <div class="chat-area" id="chatArea"></div>
+  <div class="chat-input">
+    <input type="text" id="messageInput" placeholder="Type a message...">
     <button id="sendBtn">Send</button>
   </div>
 </div>
-<!-- Leaderboard modal, hidden by default -->
-<div id="leaderboard" style="display: none;">
-  <h3>Leaderboard</h3>
-  <ul id="leaderboard-list"></ul>
-  <button onclick="hideLeaderboard()">Close</button>
-</div>
-<script src="script.js"></script>
+<script>
+  // Populate leaderboard (example data)
+  const leaderboardData = { 'test1': 100, 'test2': 50 };
+  const leaderboardList = document.getElementById('leaderboardList');
+  Object.entries(leaderboardData)
+          .sort((a, b) => b[1] - a[1])
+          .forEach(([user, score]) => {
+            const li = document.createElement('li');
+            li.textContent = `${user}: ${score}`;
+            leaderboardList.appendChild(li);
+          });
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    window.location.href = 'login.html';
+  });
+  // Chat (placeholder)
+  document.getElementById('sendBtn').addEventListener('click', () => {
+    const msg = document.getElementById('messageInput').value;
+    const chat = document.getElementById('chatArea');
+    chat.innerHTML += `<p>${msg}</p>`;
+    document.getElementById('messageInput').value = '';
+  });
+</script>
 </body>
 </html>
