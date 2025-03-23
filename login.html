@@ -113,11 +113,23 @@
             font-size: 14px;
         }
         .create-account a:hover { color: #f49803; }
+        .notification {
+            color: #f68e44;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .suspense-text {
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 <div class="login-box">
     <h2>Login to UnoAI</h2>
+    <p class="suspense-text">the ai you never thought you needed....</p>
     <form id="loginForm">
         <div class="user-box">
             <input type="text" id="username" required>
@@ -128,37 +140,82 @@
             <label>Password</label>
         </div>
         <a href="#" id="submitBtn">Submit<span></span><span></span><span></span><span></span></a>
+        <div class="notification" id="notification"></div>
         <div class="create-account">
             <a href="#" id="createAccountBtn">Don't have an account? Sign Up</a>
         </div>
     </form>
 </div>
+
+<!-- Audio element for background music (loops continuously) -->
+<audio id="backgroundMusic" src="audio/662394__kjartan_abel__saxophone-and-piano-nordic-themed-soundtrack.mp3" loop></audio>
+
 <script>
-    // Simple login and account creation (for testing)
+    // Load users from localStorage (temporary for frontend testing)
     const users = JSON.parse(localStorage.getItem('users')) || {};
+    const notification = document.getElementById('notification');
+
+    // Play background music immediately after DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const bgMusic = document.getElementById('backgroundMusic');
+        bgMusic.volume = 0.3; // Set to 30% volume to avoid overpowering other sounds
+        bgMusic.play().catch(error => {
+            // Autoplay might be blocked by the browser; log the error for debugging
+            console.log('Autoplay blocked:', error);
+            // Fallback: Play on first user interaction (e.g., clicking anywhere)
+            document.body.addEventListener('click', () => {
+                bgMusic.play();
+            }, { once: true });
+        });
+    });
+
+    // Function to play bomb sound for incorrect login (allows overlapping playback)
+    function playBombSound() {
+        const bombSound = new Audio('audio/46414__erh__asynth-30-bomb.mp3');
+        bombSound.play();
+    }
+
+    // Function to play success sound for successful login (allows overlapping playback)
+    function playSuccessSound() {
+        const successSound = new Audio('audio/27568__suonho__memorymoon_space-blaster-plays.mp3');
+        successSound.play();
+    }
+
+    // Handle login submission
     document.getElementById('submitBtn').addEventListener('click', (e) => {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+
+        // --- For David: Replace with backend authentication ---
+        // Replace this localStorage check with a POST /login API call
         if (users[username] && users[username].password === password) {
-            alert('Login successful!');
-            window.location.href = 'main.html'; // Redirect to main page
+            playSuccessSound(); // Play success sound
+            notification.textContent = 'Login successful! Redirecting...';
+            localStorage.setItem('currentUser', username); // Store current user for main.html
+            setTimeout(() => { window.location.href = 'main.html'; }, 1000);
         } else {
-            alert('Invalid username or password.');
+            playBombSound(); // Play bomb sound for failed login
+            notification.textContent = 'Invalid username or password.';
         }
     });
+
+    // Handle account creation
     document.getElementById('createAccountBtn').addEventListener('click', (e) => {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+
+        // --- For David: Replace with backend signup ---
+        // Replace this localStorage logic with a POST /signup API call
         if (!username || !password) {
-            alert('Please enter a username and password.');
+            notification.textContent = 'Please enter a username and password.';
         } else if (users[username]) {
-            alert('Username already exists.');
+            notification.textContent = 'Username already exists.';
         } else {
             users[username] = { password };
             localStorage.setItem('users', JSON.stringify(users));
-            alert('Account created! You can now log in.');
+            notification.textContent = 'Account created! You can now log in.';
         }
     });
 </script>
