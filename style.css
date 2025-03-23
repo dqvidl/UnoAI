@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to right, #00cc00, #00b7eb); /* Vibrant gradient background */
+  background: linear-gradient(to right, #00cc00, #00b7eb); /* Default gradient */
   margin: 0;
   gap: 20px;
   transition: background-color 0.5s ease; /* Smooth theme transitions */
@@ -32,7 +32,7 @@ label { font-size: 16px; color: #333; display: block; text-align: left; margin-b
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
 }
 
 /* Container for sidebar items */
@@ -189,7 +189,7 @@ label { font-size: 16px; color: #333; display: block; text-align: left; margin-b
 #leaderboard-list { list-style: none; padding: 0; margin-bottom: 20px; }
 #leaderboard-list li { color: white; margin-bottom: 5px; }
 
-/* Login form styling for a professional look */
+/* Login form styling */
 .login-form {
   background-color: #fff;
   padding: 30px;
@@ -213,50 +213,29 @@ label { font-size: 16px; color: #333; display: block; text-align: left; margin-b
 .login-form a { color: #0078ff; text-decoration: none; }
 .login-form a:hover { text-decoration: underline; }
 
-/* AI personality themes */
-.ai-d1-hater {
-  background-color: #ff4d4d;
-  color: #000;
+/* AI personality themes for main.html */
+.d1-hater {
+  background: linear-gradient(#4a2c2c, #8b2e2e); /* Red theme for D1 Hater */
 }
-.ai-d1-hater .sidebar { background-color: #990000; }
-.ai-d1-hater .chat-container { background-color: #ff6666; }
-.ai-d1-hater .sidebar-item { background-color: #ff6666; }
-.ai-d1-hater .sidebar-item:hover { background-color: #ff9999; }
+.d1-hater .sidebar { background-color: #990000; }
+.d1-hater .chat-container { background-color: #ff6666; }
+.d1-hater .sidebar-item { background-color: #ff6666; }
+.d1-hater .sidebar-item:hover { background-color: #ff9999; }
 
-.ai-lauderbot2000 {
-  background-color: #ffd700;
-  color: #4b0082;
+.lauderbot2000 {
+  background: linear-gradient(#2c4a2c, #4a8b2e); /* Green theme for LauderBot2000 */
 }
-.ai-lauderbot2000 .sidebar { background-color: #4b0082; }
-.ai-lauderbot2000 .chat-container { background-color: #ffe066; }
-.ai-lauderbot2000 .sidebar-item { background-color: #ffe066; }
-.ai-lauderbot2000 .sidebar-item:hover { background-color: #fff0b3; }
+.lauderbot2000 .sidebar { background-color: #006600; }
+.lauderbot2000 .chat-container { background-color: #99ff99; }
+.lauderbot2000 .sidebar-item { background-color: #99ff99; }
+.lauderbot2000 .sidebar-item:hover { background-color: #ccffcc; }
 
-.ai-king-nerd {
-  background-color: #4d94ff;
-  color: #fff;
+.king-nerd {
+  background: linear-gradient(#2c2c4a, #2e4a8b); /* Blue theme for King Nerd */
 }
-.ai-king-nerd .sidebar { background-color: #003366; }
-.ai-king-nerd .chat-container { background-color: #66a3ff; }
-.ai-king-nerd .sidebar-item { background-color: #66a3ff; }
-.ai-king-nerd .sidebar-item:hover { background-color: #99c2ff; }
-
-.ai-placeholder1 {
-  background-color: #66cc66;
-  color: #000;
-}
-.ai-placeholder1 .sidebar { background-color: #006600; }
-.ai-placeholder1 .chat-container { background-color: #99ff99; }
-.ai-placeholder1 .sidebar-item { background-color: #99ff99; }
-.ai-placeholder1 .sidebar-item:hover { background-color: #ccffcc; }
-
-.ai-placeholder2 {
-  background-color: #ff9900;
-  color: #008080;
-}
-.ai-placeholder2 .sidebar { background-color: #008080; }
-.ai-placeholder2 .chat-container { background-color: #ffcc66; }
-.ai-placeholder2 .sidebar-item { background-color: #ffcc66; }
-.ai-placeholder2 .sidebar-item:hover { background-color: #ffe0b3; }
+.king-nerd .sidebar { background-color: #003366; }
+.king-nerd .chat-container { background-color: #66a3ff; }
+.king-nerd .sidebar-item { background-color: #66a3ff; }
+.king-nerd .sidebar-item:hover { background-color: #99c2ff; }
 
 /* Made by Isaac */
