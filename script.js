@@ -97,7 +97,7 @@ window.onload = function () {
   document.getElementById("LauderBot2000").addEventListener("click", function() { changeUI("Who's the best teacher? I am.", 2); });
   document.getElementById("King Nerd").addEventListener("click", function() { changeUI("Erm, actually...", 3); });
   document.getElementById("Gym Rat").addEventListener("click", function() { changeUI("Yeahh buddy! Lightweight!", 4); });
-  document.getElementById("Closet Kid").addEventListener("click", function() { changeUI("Do I really have to talk to them...?", 5); });
+  document.getElementById("Emo Kid").addEventListener("click", function() { changeUI("Do I really have to talk to them...?", 5); });
 };
 
   function toggleProfile() {
