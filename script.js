@@ -1,5 +1,6 @@
 // Event listeners for sending a message by clicking the button or pressing Enter
 document.getElementById("sendBtn").addEventListener("click", sendMessage);
+
 document.getElementById("userInput").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     sendMessage();
@@ -8,6 +9,8 @@ document.getElementById("userInput").addEventListener("keypress", function (e) {
 
 // Function to send the user message and fetch the GPT response
 async function sendMessage() {
+  let sent = new Audio("message.mp3"); // Load the sound file
+  sent.play(); // Play the sound
   const inputField = document.getElementById("userInput");
   const message = inputField.value.trim();
   if (message === "") return;
@@ -52,4 +55,58 @@ function appendMessage(message, senderClass) {
   messageElem.textContent = message;
   chatBox.appendChild(messageElem);
   chatBox.scrollTop = chatBox.scrollHeight;
+
+  
+}
+
+
+function changeUI(newText, num) {
+  const body = document.body;
+  document.getElementById("mainPhrase").textContent = newText;
+  document.getElementById("chat-container").style.display = "flex" ;
+  document.getElementById("chatBox").innerHTML = "";
+
+  switch(num) {
+    case 1:
+      body.classList.remove( "d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
+      body.classList.add("d1-hater");
+      break;
+    case 2:
+      body.classList.remove( "d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
+      body.classList.add("lauderbot2000");
+      break;
+    case 3:
+      body.classList.remove( "d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
+      body.classList.add("king-nerd");
+      break;
+    case 4:
+      body.classList.remove( "d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
+      body.classList.add("gym-rat");
+      break;
+    case 5:
+      body.classList.remove( "d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
+      body.classList.add("closet-kid");
+      break;
+    default: 
+      break;
+  }
+}
+
+window.onload = function () {
+  document.getElementById("profile-btn").addEventListener("click", toggleProfile);
+  document.getElementById("D1 Hater").addEventListener("click", function() { changeUI("Gotta hate em all!", 1); });
+  document.getElementById("LauderBot2000").addEventListener("click", function() { changeUI("Who's the best teacher? I am.", 2); });
+  document.getElementById("King Nerd").addEventListener("click", function() { changeUI("Erm, actually...", 3); });
+  document.getElementById("Gym Rat").addEventListener("click", function() { changeUI("Yeahh buddy! Lightweight!", 4); });
+  document.getElementById("Emo Kid").addEventListener("click", function() { changeUI("Do I have to talk to them...", 5); });
+};
+
+  function toggleProfile() {
+  let element = document.getElementById("profile");
+
+  if (element.style.display === "none") {
+      element.style.display = "flex"; // Show it
+  } else {
+      element.style.display = "none"; // Hide it
+  }
 }
