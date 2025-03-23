@@ -1,149 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UnoAI</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background: linear-gradient(#30142b, #a12727);
-      color: #fff;
-      height: 100vh;
-      display: flex;
-    }
-    .sidebar {
-      width: 250px;
-      background: rgba(0,0,0,.7);
-      padding: 20px;
-      box-shadow: 2px 0 10px rgba(0,0,0,.5);
-    }
-    .sidebar h3 { margin: 0 0 20px; color: #f68e44; }
-    .sidebar button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #b79726;
-      border: none;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .sidebar button:hover { background: #f49803; }
-    .leaderboard { margin-top: 20px; }
-    .leaderboard ul { list-style: none; padding: 0; }
-    .leaderboard li { padding: 5px 0; }
-    .main-content {
-      flex-grow: 1;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-area { flex-grow: 1; }
-    .chat-input {
-      display: flex;
-      margin-top: 20px;
-    }
-    .chat-input input {
-      flex-grow: 1;
-      padding: 10px;
-      border: none;
-      border-bottom: 1px solid #fff;
-      background: transparent;
-      color: #fff;
-    }
-    .chat-input button {
-      padding: 10px 20px;
-      background: #b79726;
-      border: none;
-      color: #fff;
-      border-radius: 5px;
-    }
-    .chat-input button:hover { background: #f49803; }
-    .personality-button.active { background: #ffd700; color: #000; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="sidebar">
-  <h3>AI Personalities</h3>
-  <button class="personality-button" data-personality="d1-hater">D1 Hater</button>
-  <button class="personality-button" data-personality="lauderbot2000">LauderBot2000</button>
-  <button class="personality-button" data-personality="king-nerd">King Nerd</button>
-  <div class="leaderboard">
+  <h1>UnoAI</h1>
+  <div class="sidebar-item-container">
+    <button id="D1 Hater">D1 Hater</button>
+    <button id="LauderBot2000">LauderBot2000</button>
+    <button id="King Nerd">King Nerd</button>
+    <button id="Gym Rat">Gym Rat</button>
+    <button id="Emo Kid">Emo Kid</button>
+  </div>
+  <button class="profile-btn" id="profile-btn">Leaderboard</button>
+  <!-- Added logout button -->
+  <button class="profile-btn" id="logoutBtn" style="bottom: 140px;">Logout</button>
+</div>
+<div class="profile" id="profile">
+  <div class="profile-content">
     <h3>Leaderboard</h3>
     <ul id="leaderboardList"></ul>
   </div>
-  <button id="logoutBtn">Logout</button>
 </div>
-<div class="main-content">
-  <div class="chat-area" id="chatArea"></div>
-  <div class="chat-input">
-    <input type="text" id="messageInput" placeholder="Type a message...">
+<h1 id="mainPhrase">Please choose your AI.</h1>
+<div class="chat-container" id="chat-container">
+  <div class="chat-box" id="chatBox"></div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type a message...">
     <button id="sendBtn">Send</button>
   </div>
 </div>
-
-<script>
-  // Populate leaderboard with example data
-  const leaderboardData = { 'test1': 100, 'test2': 50 };
-  const leaderboardList = document.getElementById('leaderboardList');
-  Object.entries(leaderboardData)
-          .sort((a, b) => b[1] - a[1])
-          .forEach(([user, score]) => {
-            const li = document.createElement('li');
-            li.textContent = `${user}: ${score}`;
-            leaderboardList.appendChild(li);
-          });
-
-  // Redirect to login if not authenticated
-  if (!localStorage.getItem('currentUser')) {
-    window.location.href = 'login.html';
-  }
-
-  // Logout functionality
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    // --- For David: Add backend logout logic ---
-    // Clear session on the server and redirect
-    localStorage.removeItem('currentUser');
-    window.location.href = 'login.html';
-  });
-
-  // Basic chat functionality (placeholder for David's backend)
-  document.getElementById('sendBtn').addEventListener('click', () => {
-    const msg = document.getElementById('messageInput').value;
-    const chat = document.getElementById('chatArea');
-    chat.innerHTML += `<p>${msg}</p>`;
-    document.getElementById('messageInput').value = '';
-    // --- For David: Replace with backend chat API ---
-    // Send message to backend and append response
-  });
-
-  // Function to play success sound for personality switching (allows overlapping playback)
-  function playSuccessSound() {
-    const successSound = new Audio('audio/27568__suonho__memorymoon_space-blaster-plays.mp3');
-    successSound.play();
-  }
-
-  // Handle AI personality switching with visual changes and sound
-  document.querySelectorAll('.personality-button').forEach(button => {
-    button.addEventListener('click', function() {
-      // Remove 'active' class from all buttons
-      document.querySelectorAll('.personality-button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      // Add 'active' class to clicked button
-      this.classList.add('active');
-      // Apply personality-specific theme to body
-      document.body.className = this.dataset.personality;
-      // Play success sound when switching
-      playSuccessSound();
-      // --- For David: Notify backend of personality change ---
-      // Send the selected personality (e.g., this.dataset.personality) to the backend
-    });
-  });
-</script>
+<script src="script.js"></script>
 </body>
 </html>

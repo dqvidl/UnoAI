@@ -1,241 +1,211 @@
-/* General body styling for a sleek, centered layout */
+/* General body styling */
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #00cc00, #00b7eb); /* Default gradient */
-  margin: 0;
-  gap: 20px;
-  transition: background-color 0.5s ease; /* Smooth theme transitions */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #302f2f;
+    margin: 0;
+    gap: 20px;
+    transition: background 0.5s ease; /* Smooth transition for background changes */
 }
 
-/* Headings for consistent typography */
-h1 { font-size: 36px; color: #333; margin-bottom: 10px; }
-h2 { font-size: 18px; color: #666; margin-bottom: 20px; }
+/* Headings */
+h1 { font-size: 400%; color: white; }
 h3 { font-size: 24px; color: white; }
-h4 { font-size: 24px; color: #333; margin-bottom: 20px; }
-h5 { font-size: 18px; color: #333; }
-label { font-size: 16px; color: #333; display: block; text-align: left; margin-bottom: 5px; }
 
-/* Sidebar for AI selection and navigation */
+/* Sidebar styling from Matthew */
 .sidebar {
-  height: 100%;
-  width: 12%;
-  position: fixed;
-  left: 0;
-  background-color: #202020;
-  color: white;
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    height: 100%;
+    width: 17%;
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    left: 0;
+    background-color: #202020;
+    color: white;
+    overflow-x: hidden;
+    padding-top: 20px;
+    justify-content: center;
 }
 
-/* Container for sidebar items */
 .sidebar-item-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+    top: 300px;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Sidebar buttons with hover effects */
-.sidebar-item {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #303030;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.sidebar-item-container button {
+    width: 80%;
+    height: 2%;
+    background-color: #2e2e2e;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.sidebar-item:hover {
-  background-color: #505050;
+.sidebar button:hover { background-color: #454545; }
+
+/* Profile/Leaderboard button */
+.profile-btn {
+    display: flex;
+    position: absolute;
+    bottom: 200px;
+    width: 80%;
+    height: 55px;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
 }
 
-/* Logout button at the bottom of sidebar */
-.login-btn {
-  position: absolute;
-  bottom: 20px;
-  width: 80%;
-  padding: 10px;
-  background-color: #303030;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.profile-btn:hover { background-color: #454545; }
+
+/* Leaderboard modal */
+.profile {
+    display: none; /* Hidden initially */
+    position: fixed;
+    top: 24.5%;
+    right: 2%;
+    width: 25%;
+    height: 70%;
+    background: #2e2e2e;
+    border: 3px solid #202020;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px #202020;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-btn:hover {
-  background-color: #505050;
+.profile-content {
+    background-color: #2e2e2e;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    color: white;
 }
 
-/* Chat container for crisp messaging */
+.profile-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-content li {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Chat container */
 .chat-container {
-  width: 40%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  background: #444444;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  overflow: hidden;
-  transition: background-color 0.5s ease;
+    width: 40%;
+    height: 90%;
+    display: none;
+    flex-direction: column;
+    background: #444444;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-/* Chat box for message display */
 .chat-box {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Message styling for user and bot */
 .message {
-  max-width: 80%;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
-.user { align-self: flex-end; background-color: #0078ff; color: white; }
-.bot { align-self: flex-start; background-color: #e5e5ea; color: #333; }
+.user {
+    align-self: flex-end;
+    background-color: #0078ff;
+    color: white;
+}
 
-/* Input container for sending messages */
+.bot {
+    align-self: flex-start;
+    background-color: #e5e5ea;
+}
+
 .input-container {
-  display: flex;
-  padding: 10px;
-  background-color: #444444;
-  border-top: 1px solid #555;
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #444444;
+    background-color: #444444;
 }
 
-.input-container input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #555;
-  color: white;
-  outline: none;
+input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    max-height: 50px;
+    width: 20%;
+    background-color: #444444;
+    color: white;
 }
 
-.input-container button {
-  margin-left: 10px;
-  padding: 10px 15px;
-  background: #0078ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #0078ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.input-container button:hover {
-  background: #0056b3;
-}
-
-/* Custom button styling for login/signup */
-.custom-btn {
-  width: 130px;
-  height: 40px;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 25px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 500;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  box-shadow: inset 2px 2px 2px rgba(255,255,255,.5), 7px 7px 20px rgba(0,0,0,.1);
-}
-
-.btn-7 {
-  background: linear-gradient(0deg, rgba(255,151,0,1) 0%, rgba(251,75,2,1) 100%);
-  border: none;
-}
-
-.btn-7 span { display: block; width: 100%; height: 100%; }
-.btn-7:hover { color: rgba(251,75,2,1); background: transparent; }
-
-/* Leaderboard modal styling */
-#leaderboard {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #444444;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
-
-#leaderboard h3 { color: white; margin-bottom: 10px; }
-#leaderboard-list { list-style: none; padding: 0; margin-bottom: 20px; }
-#leaderboard-list li { color: white; margin-bottom: 5px; }
-
-/* Login form styling */
-.login-form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  width: 300px;
-  text-align: center;
-}
-
-.login-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none;
-}
-
-.login-form button:hover { background-color: #0056b3; }
-.login-form a { color: #0078ff; text-decoration: none; }
-.login-form a:hover { text-decoration: underline; }
-
-/* AI personality themes for main.html */
+/* AI Themes (Matthew's emoji backgrounds) */
 .d1-hater {
-  background: linear-gradient(#4a2c2c, #8b2e2e); /* Red theme for D1 Hater */
+    background-image: url('background/angry-emoji-background.png');
+    background-size: cover;
+    background-repeat: repeat;
 }
-.d1-hater .sidebar { background-color: #990000; }
-.d1-hater .chat-container { background-color: #ff6666; }
-.d1-hater .sidebar-item { background-color: #ff6666; }
-.d1-hater .sidebar-item:hover { background-color: #ff9999; }
 
 .lauderbot2000 {
-  background: linear-gradient(#2c4a2c, #4a8b2e); /* Green theme for LauderBot2000 */
+    background-image: url('background/Lauder-emoji-background.png');
+    background-size: cover;
+    background-repeat: repeat;
 }
-.lauderbot2000 .sidebar { background-color: #006600; }
-.lauderbot2000 .chat-container { background-color: #99ff99; }
-.lauderbot2000 .sidebar-item { background-color: #99ff99; }
-.lauderbot2000 .sidebar-item:hover { background-color: #ccffcc; }
 
 .king-nerd {
-  background: linear-gradient(#2c2c4a, #2e4a8b); /* Blue theme for King Nerd */
+    background-image: url('background/nerd-emoji-background.png');
+    background-size: cover;
+    background-repeat: repeat;
 }
-.king-nerd .sidebar { background-color: #003366; }
-.king-nerd .chat-container { background-color: #66a3ff; }
-.king-nerd .sidebar-item { background-color: #66a3ff; }
-.king-nerd .sidebar-item:hover { background-color: #99c2ff; }
 
-/* Made by Isaac */
+.gym-rat {
+    background-image: url('background/muscle-emoji-background.png');
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+.closet-kid {
+    background-image: url('background/emo-emoji-background.png');
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+/* Made by Isaac and Matthew */
