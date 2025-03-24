@@ -1,211 +1,459 @@
+/* Import a modern font for professionalism */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 /* General body styling */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #302f2f;
-    margin: 0;
-    gap: 20px;
-    transition: background 0.5s ease; /* Smooth transition for background changes */
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c); /* Subtle gradient for main.html */
+  margin: 0;
+  gap: 20px;
+  transition: background 0.5s ease;
 }
 
 /* Headings */
-h1 { font-size: 400%; color: white; }
-h3 { font-size: 24px; color: white; }
+h1 {
+  font-size: 3.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
 
-/* Sidebar styling from Matthew */
+h3 {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* Sidebar styling */
 .sidebar {
-    height: 100%;
-    width: 17%;
-    position: absolute;
-    display: flex;
-    z-index: 1;
-    left: 0;
-    background-color: #202020;
-    color: white;
-    overflow-x: hidden;
-    padding-top: 20px;
-    justify-content: center;
+  height: 100%;
+  width: 17%;
+  position: absolute;
+  display: flex;
+  z-index: 1;
+  left: 0;
+  background: linear-gradient(180deg, #1c1c1c, #2a2a2a);
+  color: white;
+  overflow-x: hidden;
+  padding-top: 30px;
+  justify-content: center;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .sidebar-item-container {
-    top: 300px;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  top: 200px;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidebar-item-container button {
-    width: 80%;
-    height: 2%;
-    background-color: #2e2e2e;
-    margin: 10px;
-    border-radius: 5px;
-    text-align: center;
-    color: white;
-    border: none;
-    cursor: pointer;
+  width: 80%;
+  padding: 12px;
+  background: #2e2e2e;
+  margin: 8px 0;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-.sidebar button:hover { background-color: #454545; }
+.sidebar-item-container button:hover {
+  background: #454545;
+  transform: translateY(-2px);
+}
 
 /* Profile/Leaderboard button */
 .profile-btn {
-    display: flex;
-    position: absolute;
-    bottom: 200px;
-    width: 80%;
-    height: 55px;
-    background-color: #2e2e2e;
-    color: white;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
+  display: flex;
+  position: absolute;
+  bottom: 200px;
+  width: 80%;
+  height: 55px;
+  background: #2e2e2e;
+  color: white;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-.profile-btn:hover { background-color: #454545; }
+.profile-btn:hover {
+  background: #454545;
+  transform: translateY(-2px);
+}
 
 /* Leaderboard modal */
 .profile {
-    display: none; /* Hidden initially */
-    position: fixed;
-    top: 24.5%;
-    right: 2%;
-    width: 25%;
-    height: 70%;
-    background: #2e2e2e;
-    border: 3px solid #202020;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px #202020;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 15%;
+  right: 2%;
+  width: 25%;
+  height: 70%;
+  background: rgba(46, 46, 46, 0.95);
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 .profile-content {
-    background-color: #2e2e2e;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    position: relative;
-    color: white;
+  background: transparent;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  color: white;
 }
 
 .profile-content ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .profile-content li {
-    margin: 10px 0;
-    font-size: 16px;
+  margin: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 6px;
 }
 
-/* Chat container */
+/* Chat container with glassmorphism effect */
 .chat-container {
-    width: 40%;
-    height: 90%;
-    display: none;
-    flex-direction: column;
-    background: #444444;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+  width: 40%;
+  height: 90%;
+  display: none;
+  flex-direction: column;
+  background: rgba(68, 68, 68, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .chat-box {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
-    max-width: 80%;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .user {
-    align-self: flex-end;
-    background-color: #0078ff;
-    color: white;
+  align-self: flex-end;
+  background: #0078ff;
+  color: white;
 }
 
 .bot {
-    align-self: flex-start;
-    background-color: #e5e5ea;
+  align-self: flex-start;
+  background: #e5e5ea;
+  color: #333;
 }
 
 .input-container {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #444444;
-    background-color: #444444;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(68, 68, 68, 0.9);
 }
 
 input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    max-height: 50px;
-    width: 20%;
-    background-color: #444444;
-    color: white;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  max-height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.95rem;
 }
 
 button {
-    margin-left: 10px;
-    padding: 10px 15px;
-    border: none;
-    background: #0078ff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #0078ff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #005bbb;
+  transform: translateY(-2px);
 }
 
 /* AI Themes (Matthew's emoji backgrounds) */
 .d1-hater {
-    background-image: url('background/angry-emoji-background.png');
-    background-size: cover;
-    background-repeat: repeat;
+  background-image: url('background/angry-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
 }
 
 .lauderbot2000 {
-    background-image: url('background/Lauder-emoji-background.png');
-    background-size: cover;
-    background-repeat: repeat;
+  background-image: url('background/Lauder-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
 }
 
 .king-nerd {
-    background-image: url('background/nerd-emoji-background.png');
-    background-size: cover;
-    background-repeat: repeat;
+  background-image: url('background/nerd-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
 }
 
 .gym-rat {
-    background-image: url('background/muscle-emoji-background.png');
-    background-size: cover;
-    background-repeat: repeat;
+  background-image: url('background/muscle-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
 }
 
 .closet-kid {
-    background-image: url('background/emo-emoji-background.png');
-    background-size: cover;
-    background-repeat: repeat;
+  background-image: url('background/emo-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+/* Login page specific styles */
+html.login-page {
+  height: 100%;
+}
+
+body.login-page {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#30142b, #a12727);
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 1rem;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #f68e44;
+  font-size: 0.75rem;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #b79726;
+  font-size: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 20px;
+  letter-spacing: 4px;
+}
+
+.login-box a:hover {
+  background: #f49803;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #f4c803, 0 0 25px #bd9d0b, 0 0 50px #f4e403, 0 0 100px #d5cf1e;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.login-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f4c003);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.login-box a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #f4bc03);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% { top: -100%; }
+  50%, 100% { top: 100%; }
+}
+
+.login-box a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #f4dc03);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+  0% { right: -100%; }
+  50%, 100% { right: 100%; }
+}
+
+.login-box a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #f4b003);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% { bottom: -100%; }
+  50%, 100% { bottom: 100%; }
+}
+
+.create-account {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.create-account a {
+  color: #b79726;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.create-account a:hover {
+  color: #f49803;
+}
+
+.notification {
+  color: #f68e44;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.suspense-text {
+  font-style: italic;
+  color: #ccc;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1rem;
+  display: none; /* Hidden since we're using the fluid text effect */
+}
+
+#magic {
+  position: absolute;
+  width: 100%;
+  height: 30px; /* Match the original suspense text height */
+  top: 110px; /* Position it where the suspense text was */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 /* Made by Isaac and Matthew */

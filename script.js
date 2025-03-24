@@ -11,6 +11,18 @@ if (document.getElementById('chatBox')) {
     window.location.href = 'login.html';
   }
 
+  // Continue background music at a lower volume
+  const bgMusic = document.getElementById('backgroundMusic');
+  if (localStorage.getItem('musicPlaying') === 'true') {
+    bgMusic.volume = 0.1; // Lower volume to 10%
+    bgMusic.play().catch(error => {
+      console.log('Autoplay blocked:', error);
+      document.body.addEventListener('click', () => {
+        bgMusic.play();
+      }, { once: true });
+    });
+  }
+
   // Populate leaderboard with sample data
   const leaderboardData = { 'User1': 100, 'User2': 50, 'User3': 30 }; // Sample data
   const leaderboardList = document.getElementById('leaderboardList');
@@ -40,10 +52,18 @@ if (document.getElementById('chatBox')) {
   fetchLeaderboard();
   */
 
-  // Function to play success sound for personality switching (allows overlapping playback)
+  // Function to play success sound for personality switching
   function playSuccessSound() {
     const successSound = new Audio('audio/27568__suonho__memorymoon_space-blaster-plays.mp3');
     successSound.play();
+  }
+
+  // Function to play message send sound (Matthew's audio)
+  function playMessageSound() {
+    const messageSound = new Audio('audio/message.mp3');
+    messageSound.play().catch(error => {
+      console.error('Error playing message sound:', error);
+    });
   }
 
   // Event listeners for sending a message by clicking the button or pressing Enter
@@ -56,6 +76,7 @@ if (document.getElementById('chatBox')) {
 
   // Function to send the user message and fetch the AI response
   async function sendMessage() {
+    playMessageSound(); // Play Matthew's message sound
     const inputField = document.getElementById("userInput");
     const message = inputField.value.trim();
     if (message === "") return;
@@ -166,6 +187,7 @@ if (document.getElementById('chatBox')) {
     // --- For David: Add backend logout logic ---
     // Clear session on the server and redirect
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('musicPlaying');
     window.location.href = 'login.html';
   }
 
