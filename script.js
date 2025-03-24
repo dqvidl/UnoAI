@@ -1,4 +1,5 @@
-const OPENAI_API_KEY = ''
+const OPENAI_API_KEY = '';
+
 
 let currentPersonality = '';
 let currentQuestion = '';
@@ -13,6 +14,41 @@ const leaderboardList = document.getElementById('leaderboardList');
 const profileModal = document.getElementById('profile');
 const profileBtn = document.getElementById('profile-btn');
 const logoutBtn = document.getElementById('logoutBtn');
+
+function updateChatContainerBackground(personality) {
+  chatContainer.classList.remove(
+    'd1-hater',
+    'lauderbot2000',
+    'king-nerd',
+    'gym-rat',
+    'closet-kid'
+  );
+
+  let personalityClass = "";
+  switch (personality) {
+    case "D1 Hater":
+      personalityClass = "d1-hater";
+      break;
+    case "LauderBot2000":
+      personalityClass = "lauderbot2000";
+      break;
+    case "King Nerd":
+      personalityClass = "king-nerd";
+      break;
+    case "Gym Rat":
+      personalityClass = "gym-rat";
+      break;
+    case "Emo Kid":
+      personalityClass = "closet-kid";
+      break;
+    default:
+      personalityClass = "";
+  }
+
+  if (personalityClass) {
+    chatContainer.classList.add(personalityClass);
+  }
+}
 
 function getQuestionSystemPrompt(personality) {
   const commonInstruction = "Provide just the question, and don't make it too elaborate. The goal of the question is to evaluate how well the answer embodies the personality, and they should be able to respond in a few sentences. For example, you could ask a specific and not open ended question you would have when in a dilemma and where it would make sense to ask that person for a quick response.";
@@ -35,7 +71,6 @@ function getQuestionSystemPrompt(personality) {
   }
 }
 
-// Helper: Generate system prompt for evaluation based on personality
 function getEvaluationSystemPrompt(personality) {
   switch (personality) {
     case "D1 Hater":
@@ -55,7 +90,7 @@ function getEvaluationSystemPrompt(personality) {
   }
 }
 
-// Utility: Add message to chat box
+// Utility: Add a message to the chat box
 function addMessage(message, sender = 'bot') {
   const msgDiv = document.createElement('div');
   msgDiv.classList.add('message', sender);
@@ -79,16 +114,19 @@ logoutBtn.addEventListener('click', () => {
 // Attach event listeners to personality buttons
 document.querySelectorAll('.sidebar-item-container button').forEach(button => {
   button.addEventListener('click', () => {
-    currentPersonality = button.id; // Use the button's id as the personality name
+    currentPersonality = button.id;
     startGame(currentPersonality);
   });
 });
 
-// Start game: Update UI, show chat, and generate a tailored question
+// Start game: show chat, set background, generate question
 async function startGame(personality) {
-  mainPhrase.textContent = 'Generating Question...';
+  mainPhrase.textContent = "Generating Question...";
   chatBox.innerHTML = '';
   chatContainer.style.display = 'flex';
+
+  // Update background based on personality
+  updateChatContainerBackground(personality);
 
   try {
     const question = await generateQuestion(personality);
@@ -101,7 +139,6 @@ async function startGame(personality) {
   }
 }
 
-// Generate a question via OpenAI API with personality-specific instructions
 async function generateQuestion(personality) {
   const messages = [
     { role: "system", content: getQuestionSystemPrompt(personality) },
@@ -148,6 +185,7 @@ async function evaluateAnswer(personality, question, answer) {
   return data.choices[0].message.content.trim();
 }
 
+// Send button: handle user's answer submission
 sendBtn.addEventListener('click', async () => {
   const answer = userInput.value.trim();
   if (!answer) return;
@@ -159,6 +197,7 @@ sendBtn.addEventListener('click', async () => {
     const evaluation = await evaluateAnswer(currentPersonality, currentQuestion, answer);
     addMessage(evaluation, 'bot');
 
+    // Extract score from GPT's output using regex
     const scoreMatch = evaluation.match(/Score:\s*(\d+)\s*\/\s*100/i);
     if (scoreMatch) {
       const score = Number(scoreMatch[1]);
@@ -170,15 +209,18 @@ sendBtn.addEventListener('click', async () => {
   }
 });
 
+// Save score to leaderboard in localStorage
 function saveScore(username, score) {
   let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
   leaderboard[username] = score;
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 }
 
+// Update leaderboard UI in modal
 function updateLeaderboard() {
   leaderboardList.innerHTML = '';
   const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  // Sort by score descending
   const sorted = Object.entries(leaderboard).sort((a, b) => b[1] - a[1]);
   sorted.forEach(([user, score]) => {
     const li = document.createElement('li');
@@ -186,3 +228,4 @@ function updateLeaderboard() {
     leaderboardList.appendChild(li);
   });
 }
+
