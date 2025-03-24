@@ -13,9 +13,12 @@ body {
 }
 
 /* Headings */
-h1 { font-size: 400%; color: white; }
+h1 {
+  font-size: 400%;
+  color: white;
+}
 
-/* Sidebar styling from Matthew */
+/* Sidebar styling */
 .sidebar {
   height: 100%;
   width: 17%;
@@ -52,7 +55,9 @@ h1 { font-size: 400%; color: white; }
   cursor: pointer;
 }
 
-.sidebar button:hover { background-color: #454545; }
+.sidebar button:hover {
+  background-color: #454545;
+}
 
 /* Profile/Leaderboard button */
 .profile-btn {
@@ -70,7 +75,9 @@ h1 { font-size: 400%; color: white; }
   cursor: pointer;
 }
 
-.profile-btn:hover { background-color: #454545; }
+.profile-btn:hover {
+  background-color: #454545;
+}
 
 /* Leaderboard modal */
 .profile {
@@ -86,11 +93,6 @@ h1 { font-size: 400%; color: white; }
   box-shadow: 0px 4px 10px #202020;
   justify-content: center;
   align-items: center;
-  animation: slideIn 0.3s ease-out;
-}
-@keyframes slideIn {
-  from {transform: translateX(100%); opacity: 0;}
-  to {transform: translateX(0); opacity: 1;}
 }
 
 .profile-content {
@@ -119,11 +121,14 @@ h1 { font-size: 400%; color: white; }
   height: 90%;
   display: none;
   flex-direction: column;
-  background: rgba(68, 68, 68, 0.9);
+  /* Remove or comment out the solid background so the image can show
+     background: rgba(68, 68, 68, 0.9); */
   border-radius: 10px;
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  background-size: cover;
+  background-repeat: repeat;
 }
 
 .chat-box {
@@ -183,35 +188,25 @@ button {
   cursor: pointer;
 }
 
-/* AI Themes (Matthew's emoji backgrounds) */
+/* Background classes for each personality */
 .d1-hater {
   background-image: url('angry-emoji-background.png');
-  background-size: cover;
-  background-repeat: repeat;
 }
 
 .lauderbot2000 {
   background-image: url('Lauder-emoji-background.png');
-  background-size: cover;
-  background-repeat: repeat;
 }
 
 .king-nerd {
   background-image: url('nerd-emoji-background.png');
-  background-size: cover;
-  background-repeat: repeat;
 }
 
 .gym-rat {
   background-image: url('muscle-emoji-background.png');
-  background-size: cover;
-  background-repeat: repeat;
 }
 
 .closet-kid {
   background-image: url('emo-emoji-background.png');
-  background-size: cover;
-  background-repeat: repeat;
 }
 
-/* Made by Isaac and Matthew */
+/* End of style.css */
