@@ -1,3 +1,4 @@
+/* General body styling */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -8,42 +9,52 @@ body {
   background-color: #302f2f;
   margin: 0;
   gap: 20px;
+  transition: background 0.5s ease; /* Smooth transition for background changes */
 }
 
-h1 { font-size: 400%; color:white;}
+/* Headings */
+h1 { font-size: 400%; color: white; }
 
+/* Sidebar styling from Matthew */
 .sidebar {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 17%; /* Set the width of the sidebar */
-    position: absolute; 
-    display:flex;
-    z-index: 1; /* Stay on top */
-    left: 0; /* can add top: 0; if need*/
-    background-color: #202020;
-    color:white;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
-    justify-content: center;
+  height: 100%;
+  width: 17%;
+  position: absolute;
+  display: flex;
+  z-index: 1;
+  left: 0;
+  background-color: #202020;
+  color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+  justify-content: center;
 }
+
 .sidebar-item-container {
-    top:300px;
-    width:100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  top: 300px;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.sidebar-item-container button{
-    width: 80%;
-    height: 2%;
-    background-color: #2e2e2e;
-    margin: 10px;
-    border-radius: 5px;
-    text-align: center;
+
+.sidebar-item-container button {
+  width: 80%;
+  height: 2%;
+  background-color: #2e2e2e;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
-  .sidebar button:hover {background-color: #454545;}
-  
+
+.sidebar button:hover { background-color: #454545; }
+
+/* Profile/Leaderboard button */
 .profile-btn {
   display: flex;
   position: absolute;
@@ -55,10 +66,13 @@ h1 { font-size: 400%; color:white;}
   border-radius: 5px;
   align-items: center;
   justify-content: center;
- }
+  border: none;
+  cursor: pointer;
+}
 
-.profile-btn:hover{ background-color: #454545;}
+.profile-btn:hover { background-color: #454545; }
 
+/* Leaderboard modal */
 .profile {
   display: none; /* Hidden initially */
   position: fixed;
@@ -66,7 +80,7 @@ h1 { font-size: 400%; color:white;}
   right: 2%;
   width: 25%;
   height: 70%;
-  background: #2e2e2e; 
+  background: #2e2e2e;
   border: 3px solid #202020;
   border-radius: 10px;
   box-shadow: 0px 4px 10px #202020;
@@ -75,22 +89,34 @@ h1 { font-size: 400%; color:white;}
 }
 
 .profile-content {
-  background-color:#2e2e2e;
+  background-color: #2e2e2e;
   padding: 20px;
   border-radius: 10px;
   width: 300px;
   text-align: center;
   position: relative;
-  color:white;
+  color: white;
 }
 
+.profile-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-content li {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* Chat container */
 .chat-container {
   width: 40%;
   height: 90%;
   display: none;
   flex-direction: column;
-  background: #444444;
+  background: rgba(68, 68, 68, 0.9);
   border-radius: 10px;
+  backdrop-filter: blur(8px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -151,9 +177,35 @@ button {
   cursor: pointer;
 }
 
-/* AI Themes*/
-.d1-hater { background-image: url('angry-emoji-background.png');}
-.lauderbot2000 { background-image: url('Lauder-emoji-background.png');}
-.king-nerd { background-image: url('nerd-emoji-background.png');}
-.gym-rat { background-image: url('muscle-emoji-background.png');}
-.closet-kid { background-image: url('emo-emoji-background.png');}
+/* AI Themes (Matthew's emoji backgrounds) */
+.d1-hater {
+  background-image: url('angry-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.lauderbot2000 {
+  background-image: url('Lauder-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.king-nerd {
+  background-image: url('nerd-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.gym-rat {
+  background-image: url('muscle-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.closet-kid {
+  background-image: url('emo-emoji-background.png');
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+/* Made by Isaac and Matthew */
