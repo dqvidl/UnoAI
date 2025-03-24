@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UnoAI</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="sidebar">
-  <h1>UnoAI</h1>
-  <div class="sidebar-item-container">
-    <button id="d1-hater">D1 Hater</button>
-    <button id="lauderbot2000">LauderBot2000</button>
-    <button id="king-nerd">King Nerd</button>
-    <button id="gym-rat">Gym Rat</button>
-    <button id="emo-kid">Emo Kid</button>
+  <div class="sidebar">
+    <h1>UnoAI</h1>
+    <div class="sidebar-item-container">
+      <button id="D1 Hater">D1 Hater</button>
+      <button id="LauderBot2000">LauderBot2000</button>
+      <button id="King Nerd">King Nerd</button>
+      <button id="Gym Rat">Gym Rat</button>
+      <button id="Emo Kid">Emo Kid</button>
+      <button id="ChatGPT">ChatGPT</button>
+    </div>
+    <button class="profile-btn" id="profile-btn">Leaderboard</button>
+    <button class="profile-btn" id="logoutBtn" style="bottom: 140px;">Logout</button>
   </div>
-  <button class="profile-btn" id="profile-btn">Leaderboard</button>
-  <button class="profile-btn" id="logoutBtn" style="bottom: 140px;">Logout</button>
-</div>
-<div class="profile" id="profile">
-  <div class="profile-content">
-    <h3>Leaderboard</h3>
-    <ul id="leaderboardList"></ul>
+
+  <div class="profile" id="profile">
+    <div class="profile-content">
+      <h3>Leaderboard</h3>
+      <ul id="leaderboardList"></ul>
+    </div>
   </div>
-</div>
-<h1 id="mainPhrase">Please choose your AI.</h1>
-<div class="chat-container" id="chat-container">
-  <div class="chat-box" id="chatBox"></div>
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type a message...">
-    <button id="sendBtn">Send</button>
+
+  <h1 id="mainPhrase">Please choose your AI.</h1>
+
+  <div class="chat-container" id="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
   </div>
-</div>
-<script src="script.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
