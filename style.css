@@ -146,6 +146,7 @@ h1 { font-size: 400%; color: white; }
 .bot {
   align-self: flex-start;
   background-color: #e5e5ea;
+  color: black;
 }
 
 .input-container {
