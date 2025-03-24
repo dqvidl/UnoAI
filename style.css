@@ -86,6 +86,11 @@ h1 { font-size: 400%; color: white; }
   box-shadow: 0px 4px 10px #202020;
   justify-content: center;
   align-items: center;
+  animation: slideIn 0.3s ease-out;
+}
+@keyframes slideIn {
+  from {transform: translateX(100%); opacity: 0;}
+  to {transform: translateX(0); opacity: 1;}
 }
 
 .profile-content {
