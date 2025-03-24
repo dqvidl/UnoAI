@@ -1,10 +1,75 @@
-// --- Authentication Logic for login.html ---
+// --- Authentication Logic for login.html (Mostly Isaac) ---
 if (document.getElementById('loginForm')) {
-  // Logic is handled inline in login.html
-  // David can replace the localStorage logic with backend API calls (POST /login, POST /signup)
+  // Load users from localStorage (temporary for frontend testing)
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  const notification = document.getElementById('notification');
+
+  // Play background music immediately after DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const bgMusic = document.getElementById('backgroundMusic');
+    bgMusic.volume = 0.3; // Set to 30% volume on login page
+    bgMusic.play().catch(error => {
+      console.log('Autoplay blocked:', error);
+      document.body.addEventListener('click', () => {
+        bgMusic.play();
+      }, { once: true });
+    });
+    // Set flag to indicate music is playing
+    localStorage.setItem('musicPlaying', 'true');
+  });
+
+  // Function to play bomb sound for incorrect login (allows overlapping playback)
+  function playBombSound() {
+    const bombSound = new Audio('audio/46414__erh__asynth-30-bomb.mp3');
+    bombSound.play();
+  }
+
+  // Function to play success sound for successful login (allows overlapping playback)
+  function playSuccessSound() {
+    const successSound = new Audio('audio/27568__suonho__memorymoon_space-blaster-plays.mp3');
+    successSound.play();
+  }
+
+  // Handle login submission
+  document.getElementById('submitBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // --- For David: Replace with backend authentication ---
+    // Replace this localStorage check with a POST /login API call
+    if (users[username] && users[username].password === password) {
+      playSuccessSound(); // Play success sound
+      notification.textContent = 'Login successful! Redirecting...';
+      localStorage.setItem('currentUser', username); // Store current user for main.html
+      setTimeout(() => { window.location.href = 'main.html'; }, 1000);
+    } else {
+      playBombSound(); // Play bomb sound for failed login
+      notification.textContent = 'Invalid username or password.';
+    }
+  });
+
+  // Handle account creation
+  document.getElementById('createAccountBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // --- For David: Replace with backend signup ---
+    // Replace this localStorage logic with a POST /signup API call
+    if (!username || !password) {
+      notification.textContent = 'Please enter a username and password.';
+    } else if (users[username]) {
+      notification.textContent = 'Username already exists.';
+    } else {
+      users[username] = { password };
+      localStorage.setItem('users', JSON.stringify(users));
+      notification.textContent = 'Account created! You can now log in.';
+    }
+  });
 }
 
-// --- Main Page Logic for main.html ---
+// --- Main Page Logic for main.html (Mostly Matthew) ---
 if (document.getElementById('chatBox')) {
   // Redirect to login if not authenticated
   if (!localStorage.getItem('currentUser')) {
@@ -14,7 +79,7 @@ if (document.getElementById('chatBox')) {
   // Continue background music at a lower volume
   const bgMusic = document.getElementById('backgroundMusic');
   if (localStorage.getItem('musicPlaying') === 'true') {
-    bgMusic.volume = 0.1; // Lower volume to 10%
+    bgMusic.volume = 0.1; // Lower volume to 10% on main page
     bgMusic.play().catch(error => {
       console.log('Autoplay blocked:', error);
       document.body.addEventListener('click', () => {
@@ -52,21 +117,21 @@ if (document.getElementById('chatBox')) {
   fetchLeaderboard();
   */
 
-  // Function to play success sound for personality switching
+  // Function to play success sound for personality switching (Mostly Isaac)
   function playSuccessSound() {
     const successSound = new Audio('audio/27568__suonho__memorymoon_space-blaster-plays.mp3');
     successSound.play();
   }
 
-  // Function to play message send sound (Matthew's audio)
+  // Function to play message send sound (Matthew's audio, fixed path)
   function playMessageSound() {
-    const messageSound = new Audio('audio/message.mp3');
+    const messageSound = new Audio('audio/message (1).mp3'); // Fixed path to match file name
     messageSound.play().catch(error => {
       console.error('Error playing message sound:', error);
     });
   }
 
-  // Event listeners for sending a message by clicking the button or pressing Enter
+  // Event listeners for sending a message by clicking the button or pressing Enter (Mostly Matthew)
   document.getElementById("sendBtn").addEventListener("click", sendMessage);
   document.getElementById("userInput").addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
@@ -74,7 +139,7 @@ if (document.getElementById('chatBox')) {
     }
   });
 
-  // Function to send the user message and fetch the AI response
+  // Function to send the user message and fetch the AI response (Mostly Matthew)
   async function sendMessage() {
     playMessageSound(); // Play Matthew's message sound
     const inputField = document.getElementById("userInput");
@@ -111,7 +176,7 @@ if (document.getElementById('chatBox')) {
     appendMessage(`Echo: ${message}`, "bot");
   }
 
-  // Helper function to append messages to the chat box
+  // Helper function to append messages to the chat box (Mostly Matthew)
   function appendMessage(message, senderClass) {
     const chatBox = document.getElementById("chatBox");
     const messageElem = document.createElement("div");
@@ -121,7 +186,7 @@ if (document.getElementById('chatBox')) {
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
-  // Function to change UI based on AI personality
+  // Function to change UI based on AI personality (Mostly Matthew)
   function changeUI(newText, num) {
     const body = document.body;
     document.getElementById("mainPhrase").textContent = newText;
@@ -154,7 +219,7 @@ if (document.getElementById('chatBox')) {
         break;
     }
 
-    // Play success sound when switching personalities
+    // Play success sound when switching personalities (Mostly Isaac)
     playSuccessSound();
 
     // --- For David: Notify backend of personality change ---
@@ -172,7 +237,7 @@ if (document.getElementById('chatBox')) {
     */
   }
 
-  // Toggle leaderboard visibility
+  // Toggle leaderboard visibility (Mostly Matthew)
   function toggleProfile() {
     let element = document.getElementById("profile");
     if (element.style.display === "none" || element.style.display === "") {
@@ -191,7 +256,7 @@ if (document.getElementById('chatBox')) {
     window.location.href = 'login.html';
   }
 
-  // Add event listeners on window load
+  // Add event listeners on window load (Mostly Matthew)
   window.onload = function () {
     document.getElementById("profile-btn").addEventListener("click", toggleProfile);
     document.getElementById("logoutBtn").addEventListener("click", logout);
