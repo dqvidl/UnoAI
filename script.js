@@ -1,188 +1,188 @@
-// --- Authentication Logic for login.html ---
-if (document.getElementById('loginForm')) {
-  // Logic is handled inline in login.html
-  // David can replace the localStorage logic with backend API calls (POST /login, POST /signup)
+const OPENAI_API_KEY = ''
+
+let currentPersonality = '';
+let currentQuestion = '';
+let currentUser = localStorage.getItem('currentUser') || 'Guest';
+
+const chatContainer = document.getElementById('chat-container');
+const chatBox = document.getElementById('chatBox');
+const mainPhrase = document.getElementById('mainPhrase');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+const leaderboardList = document.getElementById('leaderboardList');
+const profileModal = document.getElementById('profile');
+const profileBtn = document.getElementById('profile-btn');
+const logoutBtn = document.getElementById('logoutBtn');
+
+function getQuestionSystemPrompt(personality) {
+  const commonInstruction = "Provide just the question, and don't make it too elaborate. The goal of the question is to evaluate how well the answer embodies the personality, and they should be able to respond in a few sentences. For example, you could ask a specific and not open ended question you would have when in a dilemma and where it would make sense to ask that person for a quick response.";
+  
+  switch (personality) {
+    case "D1 Hater":
+      return `You are D1 Hater, a personality who hates everything and delights in people's downfall. Imagine someone asks you a quick question to get your bitter, scornful advice. ${commonInstruction} Generate a provocative, disdainful question that fits your mocking style.`;
+    case "LauderBot2000":
+      return `You are LauderBot2000, a kind and supportive high school teacher. Imagine a student is asking you a quick question for advice. ${commonInstruction} Generate a gentle, encouraging question that fits your warm and caring manner.`;
+    case "King Nerd":
+      return `You are King Nerd, an unemotional, factual nerd. Imagine someone is asking you a specific, direct question for your logical insight. ${commonInstruction} Generate a precise, analytical question that fits your robotic, data-driven style.`;
+    case "Gym Rat":
+      return `You are Gym Rat, a super muscular guy who loves protein shakes and lifting. Imagine a friend asks you for a quick piece of fitness advice. ${commonInstruction} Generate a high-energy, fitness-themed question that matches your enthusiastic style.`;
+    case "Emo Kid":
+      return `You are Emo Kid, a dark and edgy personality. Imagine someone is seeking your quick, emotionally charged advice. ${commonInstruction} Generate a dramatic, introspective question that fits your moody style.`;
+    case "ChatGPT":
+      return `You are ChatGPT. Imagine someone is asking you for a quick, clever piece of advice. ${commonInstruction} Generate a balanced, witty question that fits your smart and helpful persona.`;
+    default:
+      return `Generate a question that challenges the personality. ${commonInstruction}`;
+  }
 }
 
-// --- Main Page Logic for main.html ---
-if (document.getElementById('chatBox')) {
-  // Redirect to login if not authenticated
-  if (!localStorage.getItem('currentUser')) {
-    window.location.href = 'login.html';
+// Helper: Generate system prompt for evaluation based on personality
+function getEvaluationSystemPrompt(personality) {
+  switch (personality) {
+    case "D1 Hater":
+      return "You are D1 Hater, a personality who hates everything and delights in others’ downfall. Evaluate the player's response on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Begin your reply with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your critique in your rude tone and writing style. As D1 hater, you will always hate on everyone, even the player. Make your score objective but grill the player as hard as possible feedback wise.";
+    case "LauderBot2000":
+      return "You are LauderBot2000, a kind and supportive high school teacher. Evaluate the player's response on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Begin with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your feedback written in your kind tone.";
+    case "King Nerd":
+      return "You are King Nerd, an unemotional, factual nerd. Evaluate the player's response on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Start with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by feedback in your technical, data-driven tone and writing style.";
+    case "Gym Rat":
+      return "You are Gym Rat, a super muscular guy with a passion for lifting and protein shakes. Evaluate the player's response with high energy and fitness analogies on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Start with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your critique, written in your tone and writing style.";
+    case "Emo Kid":
+      return "You are Emo Kid, a dark, edgy personality. Evaluate the player's response on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Begin with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your deeply emotional feedback written in your writing style and tone.";
+    case "ChatGPT":
+      return "You are ChatGPT. Evaluate the player's response on how accurate it is to your personality and writing style. The player's goal is to impersonate you. Start with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your thoughtful evaluation.";
+    default:
+      return "Evaluate the player's response. Begin with 'Score: X/100' (where X is the score out of 100), then on a new line write 'Feedback:' followed by your evaluation.";
   }
+}
 
-  // Continue background music at a lower volume
-  const bgMusic = document.getElementById('backgroundMusic');
-  if (localStorage.getItem('musicPlaying') === 'true') {
-    bgMusic.volume = 0.1; // Lower volume to 10%
-    bgMusic.play().catch(error => {
-      console.log('Autoplay blocked:', error);
-      document.body.addEventListener('click', () => {
-        bgMusic.play();
-      }, { once: true });
-    });
+// Utility: Add message to chat box
+function addMessage(message, sender = 'bot') {
+  const msgDiv = document.createElement('div');
+  msgDiv.classList.add('message', sender);
+  msgDiv.textContent = message;
+  chatBox.appendChild(msgDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Toggle leaderboard modal
+profileBtn.addEventListener('click', () => {
+  profileModal.style.display = profileModal.style.display === 'flex' ? 'none' : 'flex';
+  updateLeaderboard();
+});
+
+// Simple logout (clear currentUser and redirect to login)
+logoutBtn.addEventListener('click', () => {
+  localStorage.removeItem('currentUser');
+  window.location.href = 'login.html';
+});
+
+// Attach event listeners to personality buttons
+document.querySelectorAll('.sidebar-item-container button').forEach(button => {
+  button.addEventListener('click', () => {
+    currentPersonality = button.id; // Use the button's id as the personality name
+    startGame(currentPersonality);
+  });
+});
+
+// Start game: Update UI, show chat, and generate a tailored question
+async function startGame(personality) {
+  mainPhrase.textContent = 'Generating Question...';
+  chatBox.innerHTML = '';
+  chatContainer.style.display = 'flex';
+
+  try {
+    const question = await generateQuestion(personality);
+    currentQuestion = question;
+    addMessage(question, 'bot');
+    mainPhrase.textContent = `Answer as ${personality}:`;
+  } catch (err) {
+    addMessage("Sorry, there was an error generating your question.", 'bot');
+    console.error(err);
   }
+}
 
-  // Populate leaderboard with sample data
-  const leaderboardData = { 'User1': 100, 'User2': 50, 'User3': 30 }; // Sample data
-  const leaderboardList = document.getElementById('leaderboardList');
-  Object.entries(leaderboardData)
-      .sort((a, b) => b[1] - a[1]) // Sort by score (descending)
-      .forEach(([user, score]) => {
-        const li = document.createElement('li');
-        li.textContent = `${user}: ${score}`;
-        leaderboardList.appendChild(li);
-      });
+// Generate a question via OpenAI API with personality-specific instructions
+async function generateQuestion(personality) {
+  const messages = [
+    { role: "system", content: getQuestionSystemPrompt(personality) },
+    { role: "user", content: `Personality: ${personality}` }
+  ];
 
-  // --- For David: Replace leaderboard data with backend API ---
-  // Fetch leaderboard data from the server (e.g., GET /leaderboard)
-  /*
-  async function fetchLeaderboard() {
-      const response = await fetch('YOUR_API_ENDPOINT/leaderboard');
-      const data = await response.json();
-      leaderboardList.innerHTML = '';
-      Object.entries(data)
-          .sort((a, b) => b[1] - a[1])
-          .forEach(([user, score]) => {
-              const li = document.createElement('li');
-              li.textContent = `${user}: ${score}`;
-              leaderboardList.appendChild(li);
-          });
-  }
-  fetchLeaderboard();
-  */
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + OPENAI_API_KEY
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: messages,
+      temperature: 0.7
+    })
+  });
+  
+  const data = await response.json();
+  return data.choices[0].message.content.trim();
+}
 
-  document.getElementById("sendBtn").addEventListener("click", sendMessage);
-  document.getElementById("userInput").addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
+async function evaluateAnswer(personality, question, answer) {
+  const messages = [
+    { role: "system", content: getEvaluationSystemPrompt(personality) },
+    { role: "user", content: `Personality: ${personality}\nQuestion: ${question}\nPlayer's Response: ${answer}` }
+  ];
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + OPENAI_API_KEY
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: messages,
+      temperature: 0.7
+    })
   });
 
-  // Function to send the user message and fetch the AI response
-  async function sendMessage() {
-    let sent = new Audio("message.mp3"); // Load the sound file
-    sent.play(); // Play the sound
-    const inputField = document.getElementById("userInput");
-    const message = inputField.value.trim();
-    if (message === "") return;
-
-    // Append user message
-    appendMessage(message, "user");
-    inputField.value = "";
-
-    // --- For David: Replace with backend chat API ---
-    // Send the message to the backend and get the AI response
-    /*
-    try {
-        const response = await fetch('YOUR_API_ENDPOINT/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: message,
-                personality: document.body.className // Send current AI personality
-            })
-        });
-        const data = await response.json();
-        appendMessage(data.reply, "bot");
-    } catch (error) {
-        console.error("Error fetching AI response:", error);
-        appendMessage("Sorry, something went wrong. Please try again.", "bot");
-    }
-    */
-
-    // Temporary: Echo the message as a bot response (for testing)
-    appendMessage(`Echo: ${message}`, "bot");
-  }
-
-  // Helper function to append messages to the chat box
-  function appendMessage(message, senderClass) {
-    const chatBox = document.getElementById("chatBox");
-    const messageElem = document.createElement("div");
-    messageElem.classList.add("message", senderClass);
-    messageElem.textContent = message;
-    chatBox.appendChild(messageElem);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
-
-  // Function to change UI based on AI personality
-  function changeUI(newText, num) {
-    const body = document.body;
-    document.getElementById("mainPhrase").textContent = newText;
-    document.getElementById("chat-container").style.display = "flex";
-    document.getElementById("chatBox").innerHTML = "";
-
-    // Update body class for theme
-    switch (num) {
-      case 1:
-        body.classList.remove("d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
-        body.classList.add("d1-hater");
-        break;
-      case 2:
-        body.classList.remove("d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
-        body.classList.add("lauderbot2000");
-        break;
-      case 3:
-        body.classList.remove("d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
-        body.classList.add("king-nerd");
-        break;
-      case 4:
-        body.classList.remove("d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
-        body.classList.add("gym-rat");
-        break;
-      case 5:
-        body.classList.remove("d1-hater", "lauderbot2000", "king-nerd", "gym-rat", "closet-kid");
-        body.classList.add("closet-kid");
-        break;
-      default:
-        break;
-    }
-    // --- For David: Notify backend of personality change ---
-    // Send the selected personality to the backend
-    /*
-    fetch('YOUR_API_ENDPOINT/set-personality', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            personality: body.className
-        })
-    });
-    */
-  }
-
-  // Toggle leaderboard visibility
-  function toggleProfile() {
-    let element = document.getElementById("profile");
-    if (element.style.display === "none" || element.style.display === "") {
-      element.style.display = "flex"; // Show it
-    } else {
-      element.style.display = "none"; // Hide it
-    }
-  }
-
-  // Logout function
-  function logout() {
-    // --- For David: Add backend logout logic ---
-    // Clear session on the server and redirect
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('musicPlaying');
-    window.location.href = 'login.html';
-  }
-
-  // Add event listeners on window load
-  window.onload = function () {
-    document.getElementById("profile-btn").addEventListener("click", toggleProfile);
-    document.getElementById("logoutBtn").addEventListener("click", logout);
-    document.getElementById("D1 Hater").addEventListener("click", function() { changeUI("Gotta hate em all!", 1); });
-    document.getElementById("LauderBot2000").addEventListener("click", function() { changeUI("Who's the best teacher? I am.", 2); });
-    document.getElementById("King Nerd").addEventListener("click", function() { changeUI("Erm, actually...", 3); });
-    document.getElementById("Gym Rat").addEventListener("click", function() { changeUI("Yeahh buddy! Lightweight!", 4); });
-    document.getElementById("Emo Kid").addEventListener("click", function() { changeUI("Do I really have to talk to them...?", 5); });
-  };
+  const data = await response.json();
+  return data.choices[0].message.content.trim();
 }
 
-// Made by Isaac and Matthew
+sendBtn.addEventListener('click', async () => {
+  const answer = userInput.value.trim();
+  if (!answer) return;
+  
+  addMessage(answer, 'user');
+  userInput.value = '';
+
+  try {
+    const evaluation = await evaluateAnswer(currentPersonality, currentQuestion, answer);
+    addMessage(evaluation, 'bot');
+
+    const scoreMatch = evaluation.match(/Score:\s*(\d+)\s*\/\s*100/i);
+    if (scoreMatch) {
+      const score = Number(scoreMatch[1]);
+      saveScore(currentUser, score);
+    }
+  } catch (err) {
+    addMessage("Sorry, there was an error evaluating your answer.", 'bot');
+    console.error(err);
+  }
+});
+
+function saveScore(username, score) {
+  let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  leaderboard[username] = score;
+  localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+}
+
+function updateLeaderboard() {
+  leaderboardList.innerHTML = '';
+  const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  const sorted = Object.entries(leaderboard).sort((a, b) => b[1] - a[1]);
+  sorted.forEach(([user, score]) => {
+    const li = document.createElement('li');
+    li.textContent = `${user}: ${score}/100`;
+    leaderboardList.appendChild(li);
+  });
+}
