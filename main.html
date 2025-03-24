@@ -7,30 +7,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class = "sidebar">
-    <h1>UnoAI</h1>
-    <div class = "sidebar-item-container">
-      <button id = "D1 Hater">D1 Hater</button>
-      <button id = "LauderBot2000">LauderBot2000</button>
-      <button id = "King Nerd">King Nerd</button>
-      <button id = "Gym Rat">Gym Rat</button>
-      <button id = "Emo Kid">Emo Kid</button>
-    </div>
-    <button class = "profile-btn" id = "profile-btn">Leaderboard</button>
+<div class="sidebar">
+  <h1>UnoAI</h1>
+  <div class="sidebar-item-container">
+    <button id="D1 Hater">D1 Hater</button>
+    <button id="LauderBot2000">LauderBot2000</button>
+    <button id="King Nerd">King Nerd</button>
+    <button id="Gym Rat">Gym Rat</button>
+    <button id="Emo Kid">Emo Kid</button>
   </div>
-  <div class = "profile" id = "profile">
-    <div class = "profile-content">
-      Leaderboard
-    </div>
+  <button class="profile-btn" id="profile-btn">Leaderboard</button>
+  <button class="profile-btn" id="logoutBtn" style="bottom: 140px;">Logout</button>
+</div>
+<div class="profile" id="profile">
+  <div class="profile-content">
+    <h3>Leaderboard</h3>
+    <ul id="leaderboardList"></ul>
   </div>
-  <h1 id = "mainPhrase">Please choose your AI.</h1>
-  <div class="chat-container" id = "chat-container">
-    <div class="chat-box" id="chatBox"></div>
-    <div class="input-container">
-      <input type="text" id="userInput" placeholder="Type a message...">
-      <button id="sendBtn">Send</button>
-    </div>
+</div>
+<h1 id="mainPhrase">Please choose your AI.</h1>
+<div class="chat-container" id="chat-container">
+  <div class="chat-box" id="chatBox"></div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button id="sendBtn">Send</button>
   </div>
-  <script src="script.js"></script>
+</div>
+<!-- Audio element for background music (continues from login) -->
+<audio id="backgroundMusic" src="audio/662394__kjartan_abel__saxophone-and-piano-nordic-themed-soundtrack.mp3" loop></audio>
+<script src="script.js"></script>
 </body>
 </html>
